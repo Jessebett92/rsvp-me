@@ -1,22 +1,32 @@
 import React from "react";
 import { Router } from "@reach/router";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Global Party Supplies</h1>
-      <Router>
-        <Home path="/" />
-        <About path="about" />
-        <Support path="support" />
-        <Dashboard path="dashboard">
-          <Report path=":reportID" />
-          <Invoices path="invoices" />
-          <Team path="team" />
-        </Dashboard>
-      </Router>
-    </div>
-  );
-}
+import Login from "./Auth/login";
+import Home from "./Pages/home";
 
-export default App;
+export default class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loggedIn: "NOT_LOGGED_IN"
+    };
+  }
+
+  componentDidMount() {
+    if (this.state.loggedIn !== "LOGGED_IN") {
+      console.log("You need to login!");
+    }
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <Router>
+          <Login path="/" />
+          <Home path="/home" />
+        </Router>
+      </div>
+    );
+  }
+}
